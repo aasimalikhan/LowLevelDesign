@@ -3,7 +3,16 @@ package org.example.designScenarios.designSnakeAndLadder.models;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Board {
-    Cell[][] cells;
+    private Cell[][] cells;
+
+    public Cell[][] getCells() {
+        return cells;
+    }
+
+    public void setCells(Cell[][] cells) {
+        this.cells = cells;
+    }
+
     public Board(int boardSize, int numberOfSnakes, int numberOfLadders)
     {
         initializeCells(boardSize);

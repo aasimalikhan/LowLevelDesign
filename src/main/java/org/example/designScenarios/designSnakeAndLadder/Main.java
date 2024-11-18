@@ -1,4 +1,4 @@
-package org.example.designScenarios.designSnakeAndLadder.models;
+package org.example.designScenarios.designSnakeAndLadder;
 
 public class Main {
     public static void main(String[] args) {

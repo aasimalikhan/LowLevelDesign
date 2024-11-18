@@ -1,4 +1,9 @@
-package org.example.designScenarios.designSnakeAndLadder.models;
+package org.example.designScenarios.designSnakeAndLadder;
+
+import org.example.designScenarios.designSnakeAndLadder.models.Board;
+import org.example.designScenarios.designSnakeAndLadder.models.Cell;
+import org.example.designScenarios.designSnakeAndLadder.models.Dice;
+import org.example.designScenarios.designSnakeAndLadder.models.Player;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -44,7 +49,7 @@ public class Game {
 
             currentPlayer.setCurrentPosition(currentPlayerUpdatedPosition);
             System.out.println("Player " + currentPlayer.getId() + "'s turn, jumped to position: " + currentPlayer.getCurrentPosition());
-            if (currentPlayerUpdatedPosition >= board.cells.length * board.cells.length - 1) {
+            if (currentPlayerUpdatedPosition >= board.getCells().length * board.getCells().length - 1) {
                 winner = currentPlayer;
             }
         }
@@ -53,7 +58,7 @@ public class Game {
     }
     public int jumpUpdated(int position)
     {
-        if(position > board.cells.length * board.cells.length - 1)
+        if(position > board.getCells().length * board.getCells().length - 1)
         {
             return position;
         }
