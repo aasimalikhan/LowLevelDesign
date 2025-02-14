@@ -2,6 +2,7 @@ package org.example.designScenarios.designSnakeAndLadder.models;
 
 public class Jump {
     private int start;
+    private int end;
 
     public int getStart() {
         return start;
@@ -19,5 +20,5 @@ public class Jump {
         this.end = end;
     }
 
-    private int end;
+
 }

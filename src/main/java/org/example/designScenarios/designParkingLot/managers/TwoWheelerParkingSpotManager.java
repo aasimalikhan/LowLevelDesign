@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TwoWheelerParkingSpotManager extends ParkingSpotManager{
-    List<ParkingSpot> parkingSpots;
+//    List<ParkingSpot> parkingSpots;
     ParkingStrategy parkingStrategy;
 
     public TwoWheelerParkingSpotManager(ParkingStrategy parkingStrategy) {
