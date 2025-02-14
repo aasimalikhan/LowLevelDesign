@@ -36,7 +36,7 @@ public class ReservationManager {
     }
 
     public List<Reservation> getUserReservations(String userId) throws UserNotFoundException {
-        Passenger user = PassengerManager.getInstance().getPassengerById(userId);
+        Passenger user = UserManager.getInstance().getPassengerById(userId);
         return userReservationMap.get(user);
     }
 
@@ -51,13 +51,13 @@ public class ReservationManager {
     }
 
     public List<Reservation> getUpcomingReservationsForUser(String userId) throws UserNotFoundException {
-        Passenger user = PassengerManager.getInstance().getPassengerById(userId);
+        User user = UserManager.getInstance().getUserById(userId);
         List<Reservation> userReservations = userReservationMap.get(user);
         return userReservations.stream().filter((reservation) -> reservation.getFlight().getDepartureTime().isAfter(LocalDateTime.now())).toList();
     }
 
     public List<Reservation> getCompletedReservationsForUser(String userId) throws UserNotFoundException {
-        Passenger user = PassengerManager.getInstance().getPassengerById(userId);
+        Passenger user = UserManager.getInstance().getPassengerById(userId);
         List<Reservation> userReservations = userReservationMap.get(user);
         return userReservations.stream().filter((reservation) -> reservation.getFlight().getDepartureTime().isBefore(LocalDateTime.now())).toList();
     }

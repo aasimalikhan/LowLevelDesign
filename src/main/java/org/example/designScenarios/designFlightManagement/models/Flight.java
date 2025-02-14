@@ -14,6 +14,20 @@ public class Flight {
     private Aircraft aircraft;
     private List<FlightInstance> flights;
 
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id='" + id + '\'' +
+                ", code='" + code + '\'' +
+                ", departureAirportCode='" + departureAirportCode + '\'' +
+                ", arrivalAirportCode='" + arrivalAirportCode + '\'' +
+                ", company='" + company + '\'' +
+                ", distance=" + distance +
+                ", aircraft=" + aircraft +
+                ", flights=" + flights +
+                '}';
+    }
+
     public Flight(String code, String departureAirportCode, String arrivalAirportCode, String company, Aircraft aircraft, double distance) {
         this.id = String.valueOf(idCounter++);
         this.code = code;

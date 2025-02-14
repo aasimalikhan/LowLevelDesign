@@ -27,6 +27,19 @@ public class FlightInstance {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "FlightInstance{" +
+                "id='" + id + '\'' +
+                ", departureTime=" + departureTime.toString() +
+                ", gateCode='" + gateCode + '\'' +
+                ", status=" + status +
+                ", bookedSeats=" + bookedSeats +
+                ", departureCode= " + flight.getDepartureAirportCode() +
+                ", arrivalCode= " + flight.getArrivalAirportCode() +
+                '}';
+    }
+
     public LocalDateTime getDepartureTime() {
         return departureTime;
     }

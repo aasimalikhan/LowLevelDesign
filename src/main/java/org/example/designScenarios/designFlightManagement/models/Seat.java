@@ -19,6 +19,11 @@ public class Seat {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "|";
+    }
+
     public String getCode() {
         return code;
     }

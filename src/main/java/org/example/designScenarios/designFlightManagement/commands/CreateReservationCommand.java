@@ -26,7 +26,7 @@ public class CreateReservationCommand implements Command<Reservation, Reservatio
     }
 
     private void checkSeatAvailability() throws SeatNotAvailableException {
-        boolean seatsAvailable = SeatManager.getInstance().isGroupSeatAvailable(reservation.getFlight(), reservation.getPassengerSeatMap().values().stream().toList());
+        SeatManager.getInstance().isGroupSeatAvailable(reservation.getFlight(), reservation.getPassengerSeatMap().values().stream().toList());
     }
 
     private void processPayment() throws Exception {

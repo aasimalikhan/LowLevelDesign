@@ -1,20 +1,22 @@
 package org.example.designScenarios.designFlightManagement;
 
 import org.example.designScenarios.designFlightManagement.exceptions.AirportAlreadyExistsException;
+import org.example.designScenarios.designFlightManagement.exceptions.AirportNotFoundException;
+import org.example.designScenarios.designFlightManagement.exceptions.UserNotFoundException;
 import org.example.designScenarios.designFlightManagement.managers.*;
 import org.example.designScenarios.designFlightManagement.models.*;
+import org.example.designScenarios.designFlightManagement.utils.Utility;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class FlightManagementSystem {
     private AirportManager airportManager;
     private FlightManager flightManager;
     private ReservationManager reservationManager;
     private SeatManager seatManager;
-    private PassengerManager userManager;
+    private UserManager userManager;
     private AircraftManager aircraftManager;
 
     private void initializeAirports()
@@ -92,6 +94,33 @@ public class FlightManagementSystem {
         flight.addFlight(instance2);
     }
 
+    private void initializeUsers()
+    {
+        try {
+            Set<String> usedEmails = new HashSet<>();
+            Set<String> usedPhoneNumbers = new HashSet<>();
+
+            for (int i = 0; i < 40; i++) {
+                LocalDate dob = Utility.generateRandomDOB();
+                String email;
+                do {
+                    email = "user" + (1000 + i) + "@example.com";
+                } while (!usedEmails.add(email));
+
+                String phoneNumber;
+                do {
+                    phoneNumber = Utility.generateRandomPhoneNumber();
+                } while (!usedPhoneNumbers.add(phoneNumber));
+
+                User user = new User(dob, email, phoneNumber);
+                UserManager.getInstance().addUser(user);
+            }
+        } catch (UserNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     private void initializeFlights()
     {
         try {
@@ -109,7 +138,7 @@ public class FlightManagementSystem {
                     {"CDG", "FRA"}, {"CDG", "AMS"}, {"FRA", "MAD"}, {"FRA", "IST"},
                     {"DXB", "SIN"}, {"DXB", "HKG"}
             };
-            String[] flightCompanies = {"Indigo", "Virtusa", "Air India", "British Airways", "RyanAir", "Lufthansa"}
+            String[] flightCompanies = {"Indigo", "Virtusa", "Air India", "British Airways", "RyanAir", "Lufthansa"};
             Random random = new Random();
 
             for (int i = 0; i < 35; i++) {
@@ -133,7 +162,32 @@ public class FlightManagementSystem {
         initializeAirports();
         initializeAircraft();
         initializeFlights();
+        initializeUsers();
+    }
 
+    public void printFlights() {
+        try {
+            System.out.println(FlightManager.getInstance().getFlights("BOM"));
+        } catch (AirportNotFoundException e)
+        {
+            System.err.println(e.getMessage());
+        }
+    }
+//    public void bookFlight(LocalDate date, )
+    public void printAircraft() {
+        try {
+            System.out.println(AircraftManager.getInstance().getAllAircrafts());
+        } catch (RuntimeException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void printAirports() {
+        try {
+            System.out.println(AirportManager.getInstance().getAirportByCode("BOM"));
+        } catch (AirportNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public FlightManagementSystem()
@@ -142,7 +196,10 @@ public class FlightManagementSystem {
         flightManager = FlightManager.getInstance();
         reservationManager = ReservationManager.getInstance();
         seatManager = SeatManager.getInstance();
-        userManager = PassengerManager.getInstance();
+        userManager = UserManager.getInstance();
         aircraftManager = AircraftManager.getInstance();
+        initialize();
     }
+
+
 }

@@ -10,10 +10,7 @@ import org.example.designScenarios.designFlightManagement.utils.FlightSearch;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class FlightManager {
     private final Map<Airport, List<Flight>> airportFlightMap;
@@ -38,6 +35,10 @@ public class FlightManager {
 
     public void addFlight(Flight flight) throws AirportNotFoundException {
         Airport airport = AirportManager.getInstance().getAirportByCode(flight.getDepartureAirportCode());
+        if(!airportFlightMap.containsKey(airport))
+        {
+            airportFlightMap.put(airport, new ArrayList<>());
+        }
         airportFlightMap.get(airport).add(flight);
     }
 
@@ -60,7 +61,7 @@ public class FlightManager {
         List<Flight> airportFlights = airportFlightMap.get(airport);
 
         return airportFlights.stream().flatMap((flight) -> flight.getFlightInstances().stream()).filter((flight) ->
-            flight.getDepartureTime().toLocalDate().equals(LocalDate.now())).toList();
+            flight.getDepartureTime().toLocalDate().isAfter(LocalDate.now())).toList();
     }
 
     public List<FlightInstance> getScheduledFlights(String airportCode) throws AirportNotFoundException {

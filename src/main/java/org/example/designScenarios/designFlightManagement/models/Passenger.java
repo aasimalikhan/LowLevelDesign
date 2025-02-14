@@ -2,7 +2,9 @@ package org.example.designScenarios.designFlightManagement.models;
 
 import java.time.LocalDate;
 
-public class Passenger extends User{
+public class Passenger {
+    private static long idCounter = 1000001;
+    private String id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -11,8 +13,22 @@ public class Passenger extends User{
     private String uniqueIdentificationNumberType;
     private PassengerType type;
 
-    public Passenger(LocalDate dateOfBirth, String email, String phoneNumber) {
-        super(dateOfBirth, email, phoneNumber);
+    public Passenger(String firstName, String middleName, String lastName, String uniqueIdentificationNumber, String uniqueIdentificationNumberType, PassengerType type) {
+        this.id = String.valueOf(idCounter++);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName  = middleName;
+        this.uniqueIdentificationNumber = uniqueIdentificationNumber;
+        this.uniqueIdentificationNumberType = uniqueIdentificationNumberType;
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {
