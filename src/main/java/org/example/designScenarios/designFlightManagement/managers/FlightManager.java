@@ -1,5 +1,6 @@
 package org.example.designScenarios.designFlightManagement.managers;
 
+import org.example.designScenarios.designFlightManagement.FlightManagementSystem;
 import org.example.designScenarios.designFlightManagement.exceptions.AirportNotFoundException;
 import org.example.designScenarios.designFlightManagement.exceptions.FlightNotFoundException;
 import org.example.designScenarios.designFlightManagement.models.Airport;
@@ -17,6 +18,11 @@ public class FlightManager {
 
     private static FlightManager flightManager;
 
+    public FlightManager()
+    {
+        airportFlightMap = new HashMap<>();
+    }
+
     public static FlightManager getInstance()
     {
         if(flightManager == null)
@@ -27,10 +33,6 @@ public class FlightManager {
             }
         }
         return flightManager;
-    }
-
-    private FlightManager() {
-        this.airportFlightMap = new HashMap<>();
     }
 
     public void addFlight(Flight flight) throws AirportNotFoundException {

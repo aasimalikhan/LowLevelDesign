@@ -10,6 +10,7 @@ import java.util.List;
 
 public class UserManager {
     private List<User> allUsers;
+
     private List<Passenger> allPassengers;
 
     private static UserManager userManager;

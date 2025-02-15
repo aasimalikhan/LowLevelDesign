@@ -86,4 +86,18 @@ public class Passenger {
     public void setType(PassengerType type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Passenger{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", verified=" + verified +
+                ", uniqueIdentificationNumber='" + uniqueIdentificationNumber + '\'' +
+                ", uniqueIdentificationNumberType='" + uniqueIdentificationNumberType + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }

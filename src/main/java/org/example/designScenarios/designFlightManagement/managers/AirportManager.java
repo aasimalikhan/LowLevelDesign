@@ -9,6 +9,7 @@ import java.util.List;
 
 public class AirportManager {
     private final List<Airport> allAirports;
+
     private static AirportManager airportManager;
 
     private AirportManager()

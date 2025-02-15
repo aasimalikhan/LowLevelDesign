@@ -9,10 +9,9 @@ import java.util.Optional;
 import java.util.Random;
 
 public class SeatManager {
+    private static SeatManager seatManager;
 
     private SeatManager() {}
-
-    private static SeatManager seatManager;
 
     public static SeatManager getInstance()
     {

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FlightInstance {
     private static long idCounter = 1000001;
-    private String id;
+    private final String id;
     private LocalDateTime departureTime;
     private String gateCode;
     private FlightStatus status;
@@ -25,19 +25,6 @@ public class FlightInstance {
     public String getId()
     {
         return id;
-    }
-
-    @Override
-    public String toString() {
-        return "FlightInstance{" +
-                "id='" + id + '\'' +
-                ", departureTime=" + departureTime.toString() +
-                ", gateCode='" + gateCode + '\'' +
-                ", status=" + status +
-                ", bookedSeats=" + bookedSeats +
-                ", departureCode= " + flight.getDepartureAirportCode() +
-                ", arrivalCode= " + flight.getArrivalAirportCode() +
-                '}';
     }
 
     public LocalDateTime getDepartureTime() {
@@ -90,6 +77,19 @@ public class FlightInstance {
     public void unBookSeat(String seatId)
     {
         bookedSeats.remove(seatId);
+    }
+
+    @Override
+    public String toString() {
+        return "FlightInstance{" +
+                "id='" + id + '\'' +
+                ", departureTime=" + departureTime.toString() +
+                ", gateCode='" + gateCode + '\'' +
+                ", status=" + status +
+                ", bookedSeats=" + bookedSeats +
+                ", departureCode= " + flight.getDepartureAirportCode() +
+                ", arrivalCode= " + flight.getArrivalAirportCode() +
+                '}';
     }
 
 }

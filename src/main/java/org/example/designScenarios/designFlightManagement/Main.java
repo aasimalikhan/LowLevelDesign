@@ -6,5 +6,6 @@ public class Main {
         FMS.printFlights();
         FMS.printAirports();
         FMS.printAircraft();
+        FMS.bookFlight();
     }
 }

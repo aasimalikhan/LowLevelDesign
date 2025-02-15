@@ -38,4 +38,14 @@ public class Payment {
     {
         this.paymentType = paymentType;
     }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "id='" + id + '\'' +
+                ", paymentStatus=" + paymentStatus +
+                ", amount=" + amount +
+                ", paymentType=" + paymentType +
+                '}';
+    }
 }

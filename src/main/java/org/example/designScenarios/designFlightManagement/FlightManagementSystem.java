@@ -1,5 +1,6 @@
 package org.example.designScenarios.designFlightManagement;
 
+import org.example.designScenarios.designFlightManagement.commands.BookFlightCommand;
 import org.example.designScenarios.designFlightManagement.exceptions.AirportAlreadyExistsException;
 import org.example.designScenarios.designFlightManagement.exceptions.AirportNotFoundException;
 import org.example.designScenarios.designFlightManagement.exceptions.UserNotFoundException;
@@ -22,7 +23,6 @@ public class FlightManagementSystem {
     private void initializeAirports()
     {
         try {
-            // Major Indian Airports
             airportManager.addAirport(new Airport("DEL", "Indira Gandhi International Airport", "India"));
             airportManager.addAirport(new Airport("BOM", "Chhatrapati Shivaji International Airport", "India"));
             airportManager.addAirport(new Airport("BLR", "Kempegowda International Airport", "India"));
@@ -31,7 +31,6 @@ public class FlightManagementSystem {
             airportManager.addAirport(new Airport("CCU", "Netaji Subhas Chandra Bose International Airport", "India"));
             airportManager.addAirport(new Airport("COK", "Cochin International Airport", "India"));
 
-            // Major US Airports
             airportManager.addAirport(new Airport("JFK", "John F. Kennedy International Airport",  "USA"));
             airportManager.addAirport(new Airport("LAX", "Los Angeles International Airport", "USA"));
             airportManager.addAirport(new Airport("ORD", "O'Hare International Airport", "USA"));
@@ -40,7 +39,6 @@ public class FlightManagementSystem {
             airportManager.addAirport(new Airport("MIA", "Miami International Airport", "USA"));
             airportManager.addAirport(new Airport("LAS", "Harry Reid International Airport", "USA"));
 
-            // Major European Airports
             airportManager.addAirport(new Airport("LHR", "Heathrow Airport", "UK"));
             airportManager.addAirport(new Airport("CDG", "Charles de Gaulle Airport", "France"));
             airportManager.addAirport(new Airport("FRA", "Frankfurt Airport", "Germany"));
@@ -49,7 +47,6 @@ public class FlightManagementSystem {
             airportManager.addAirport(new Airport("FCO", "Leonardo da Vinci International Airport", "Italy"));
             airportManager.addAirport(new Airport("IST", "Istanbul Airport", "Turkey"));
 
-            // Major Asian Airports
             airportManager.addAirport(new Airport("DXB", "Dubai International Airport", "UAE"));
             airportManager.addAirport(new Airport("SIN", "Singapore Changi Airport", "Singapore"));
             airportManager.addAirport(new Airport("HKG", "Hong Kong International Airport", "China"));
@@ -60,6 +57,41 @@ public class FlightManagementSystem {
 
         } catch (AirportAlreadyExistsException e) {
             System.err.println("Error initializing default airports: " + e.getMessage());
+        }
+    }
+
+    public void bookFlight() {
+        try {
+            Optional<FlightInstance> flightInstance = flightManager.getFlights("BOM").stream().findFirst();
+            if (flightInstance.isEmpty()) {
+                System.err.println("Flight does not exist");
+                return;
+            }
+
+            User user = userManager.getUserById("1000001");
+            Passenger passenger1 = new Passenger("Aasim", "Ali", "Khan", "123456789", "aadhar", PassengerType.ADULT);
+            Passenger passenger2 = new Passenger("Emaad", "Ali", "Khan", "123456723", "aadhar", PassengerType.ADULT);
+            Passenger passenger3 = new Passenger("Rida", "", "Muskaan", "123454389", "aadhar", PassengerType.ADULT);
+            Passenger passenger4 = new Passenger("Basith", "Ali", "Khan", "134256789", "aadhar", PassengerType.ADULT);
+            Passenger passenger5 = new Passenger("Asif", "Ali", "Khan", "898495845", "aadhar", PassengerType.ADULT);
+
+            List<Seat> availableSeats = seatManager.getAvailableSeats(flightInstance.get());
+            System.out.println("AvailableSeatsSize: " + availableSeats.size());
+
+            HashMap<Passenger, Seat> passengerSeatHashMap = new HashMap<>();
+
+            passengerSeatHashMap.put(passenger1, availableSeats.get(0));
+            passengerSeatHashMap.put(passenger2, availableSeats.get(1));
+            passengerSeatHashMap.put(passenger3, availableSeats.get(2));
+            passengerSeatHashMap.put(passenger4, availableSeats.get(3));
+            passengerSeatHashMap.put(passenger5, availableSeats.get(4));
+
+            BookFlightCommand bookFlightCommand = new BookFlightCommand(flightInstance.get(), user, passengerSeatHashMap);
+            Reservation reservation = bookFlightCommand.execute();
+            System.out.println("Flight Booked");
+            System.out.println(reservation);
+        } catch (Exception e) {
+            System.err.println("Error booking flight: " + e.getMessage());
         }
     }
 
@@ -83,7 +115,7 @@ public class FlightManagementSystem {
             }
         } catch (Exception e)
         {
-            System.err.println("Error initializing default Aircraft: " + e.getMessage());
+            System.err.println("Error initializing default aircraft: " + e.getMessage());
         }
     }
 
@@ -113,10 +145,10 @@ public class FlightManagementSystem {
                 } while (!usedPhoneNumbers.add(phoneNumber));
 
                 User user = new User(dob, email, phoneNumber);
-                UserManager.getInstance().addUser(user);
+                userManager.addUser(user);
             }
         } catch (UserNotFoundException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error initializing default users: " + e.getMessage());
         }
     }
 
@@ -124,7 +156,7 @@ public class FlightManagementSystem {
     private void initializeFlights()
     {
         try {
-            List<Aircraft> aircrafts = AircraftManager.getInstance().getAllAircrafts();
+            List<Aircraft> aircrafts = AircraftManager.getInstance().getAllAircraft();
             String[][] routes = {
                     {"DEL", "BOM"}, {"DEL", "HYD"}, {"DEL", "BLR"}, {"DEL", "MAA"},
                     {"BOM", "CCU"}, {"BOM", "HYD"}, {"BOM", "BLR"}, {"BOM", "MAA"},
@@ -154,7 +186,7 @@ public class FlightManagementSystem {
             }
         } catch (Exception e)
         {
-            System.err.println("Error initializing default Flights: " + e.getMessage());
+            System.err.println("Error initializing default flights: " + e.getMessage());
         }
     }
     private void initialize()
@@ -170,15 +202,15 @@ public class FlightManagementSystem {
             System.out.println(FlightManager.getInstance().getFlights("BOM"));
         } catch (AirportNotFoundException e)
         {
-            System.err.println(e.getMessage());
+            System.err.println("Error printing flights: " + e.getMessage());
         }
     }
-//    public void bookFlight(LocalDate date, )
+
     public void printAircraft() {
         try {
-            System.out.println(AircraftManager.getInstance().getAllAircrafts());
+            System.out.println(AircraftManager.getInstance().getAllAircraft());
         } catch (RuntimeException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Error printing aircraft: " + e.getMessage());
         }
     }
 
@@ -186,7 +218,7 @@ public class FlightManagementSystem {
         try {
             System.out.println(AirportManager.getInstance().getAirportByCode("BOM"));
         } catch (AirportNotFoundException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Error printing airports: " + e.getMessage());
         }
     }
 

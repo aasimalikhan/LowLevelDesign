@@ -19,11 +19,6 @@ public class Seat {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return "|";
-    }
-
     public String getCode() {
         return code;
     }
@@ -46,5 +41,10 @@ public class Seat {
 
     public void setClassType(SeatClass classType) {
         this.classType = classType;
+    }
+
+    @Override
+    public String toString() {
+        return ".";
     }
 }

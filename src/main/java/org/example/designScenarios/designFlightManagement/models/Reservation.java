@@ -65,4 +65,16 @@ public class Reservation {
     public void setInitiator(User initiator) { this.initiator = initiator; }
 
     public LocalDateTime getCreationDate() { return creationDate; }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id='" + id + '\'' +
+                ", reservationNumber='" + reservationNumber + '\'' +
+                ", flight=" + flight.getId() +
+                ", payment=" + payment.getAmount() +
+                ", initiator=" + initiator.getId() +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }

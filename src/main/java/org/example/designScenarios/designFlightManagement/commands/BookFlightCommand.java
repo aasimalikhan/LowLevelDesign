@@ -15,6 +15,13 @@ public class BookFlightCommand implements Command<FlightInstance, Reservation> {
     private User initiator;
     private Map<Passenger, Seat> passengerSeatMap;
 
+    public BookFlightCommand(FlightInstance flightInstance, User initiator, Map<Passenger, Seat> passengerSeatMap)
+    {
+        this.flightInstance = flightInstance;
+        this.initiator = initiator;
+        this.passengerSeatMap = passengerSeatMap;
+    }
+
     private void validateFlight() throws AirportNotFoundException, FlightNotFoundException {
         FlightManager.getInstance().validateFlight(flightInstance);
     }
@@ -31,8 +38,12 @@ public class BookFlightCommand implements Command<FlightInstance, Reservation> {
     private Reservation getIntermediaryReservationObject()
     {
         Payment payment = new Payment(PaymentStatus.PENDING, calculateAmount());
-        return new Reservation("1122", passengerSeatMap, payment, initiator, LocalDateTime.now());
+        payment.setPaymentType(PaymentType.DEBIT_CARD);
+        Reservation reservation =  new Reservation("1122", passengerSeatMap, payment, initiator, LocalDateTime.now());
+        reservation.setFlight(flightInstance);
+        return reservation;
     }
+
     @Override
     public synchronized Reservation execute() throws Exception {
         validateFlight();

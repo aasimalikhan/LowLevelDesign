@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AircraftManager {
-    private final List<Aircraft> allAircrafts;
-    public static AircraftManager aircraftManager;
+    private final List<Aircraft> allAircraft;
+    private static AircraftManager aircraftManager;
 
     public AircraftManager() {
-        this.allAircrafts = new ArrayList<>();
+        this.allAircraft = new ArrayList<>();
     }
 
     public static AircraftManager getInstance()
@@ -27,22 +27,23 @@ public class AircraftManager {
         return aircraftManager;
     }
 
-    public List<Aircraft> getAllAircrafts()
+    public List<Aircraft> getAllAircraft()
     {
-        return allAircrafts;
+        return allAircraft;
     }
+
     public Aircraft getAircraftById(String aircraftId) throws AircraftNotFoundException {
-        return allAircrafts.stream().filter((aircraft) -> aircraft.getId().equals(aircraftId)).findFirst().orElseThrow(() -> new AircraftNotFoundException(
+        return allAircraft.stream().filter((aircraft) -> aircraft.getId().equals(aircraftId)).findFirst().orElseThrow(() -> new AircraftNotFoundException(
                 "Aircraft with id: " + aircraftId + " not found!"
         ));
     }
 
     public void addAircraft(Aircraft aircraft) throws AircraftAlreadyExistsException {
-        boolean aircraftExists = allAircrafts.stream().anyMatch(existingAircraft -> existingAircraft.getId().equals(aircraft.getId()));
+        boolean aircraftExists = allAircraft.stream().anyMatch(existingAircraft -> existingAircraft.getId().equals(aircraft.getId()));
         if(aircraftExists)
         {
             throw new AircraftAlreadyExistsException("Aircraft with id: " + aircraft.getId() + " already exists");
         }
-        allAircrafts.add(aircraft);
+        allAircraft.add(aircraft);
     }
 }

@@ -12,19 +12,6 @@ public class Aircraft {
     private String modelName;
     private List<Seat> seatLayout;
 
-    @Override
-    public String toString() {
-        return "Aircraft{" +
-                "id='" + id + '\'' +
-                ", registrationNumber='" + registrationNumber + '\'' +
-                ", isDomestic=" + isDomestic +
-                ", company='" + company + '\'' +
-                ", manufactureYear=" + manufactureYear +
-                ", modelName='" + modelName + '\'' +
-                ", seatLayout=" + seatLayout +
-                '}';
-    }
-
     public Aircraft(String registrationNumber, Boolean isDomestic, String company, int manufactureYear, String modelName) {
         this.id = String.valueOf(idCounter++);
         this.registrationNumber = registrationNumber;
@@ -85,5 +72,18 @@ public class Aircraft {
 
     public void setModelName(String modelName) {
         this.modelName = modelName;
+    }
+
+    @Override
+    public String toString() {
+        return "Aircraft{" +
+                "id='" + id + '\'' +
+                ", registrationNumber='" + registrationNumber + '\'' +
+                ", isDomestic=" + isDomestic +
+                ", company='" + company + '\'' +
+                ", manufactureYear=" + manufactureYear +
+                ", modelName='" + modelName + '\'' +
+                ", seatLayout=" + seatLayout +
+                '}';
     }
 }

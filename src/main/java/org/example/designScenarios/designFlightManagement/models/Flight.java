@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Flight {
     private static long idCounter = 100001;
-    private String id;
+    private final String id;
     private String code;
     private String departureAirportCode;
     private String arrivalAirportCode;
@@ -13,20 +13,6 @@ public class Flight {
     private double distance;
     private Aircraft aircraft;
     private List<FlightInstance> flights;
-
-    @Override
-    public String toString() {
-        return "Flight{" +
-                "id='" + id + '\'' +
-                ", code='" + code + '\'' +
-                ", departureAirportCode='" + departureAirportCode + '\'' +
-                ", arrivalAirportCode='" + arrivalAirportCode + '\'' +
-                ", company='" + company + '\'' +
-                ", distance=" + distance +
-                ", aircraft=" + aircraft +
-                ", flights=" + flights +
-                '}';
-    }
 
     public Flight(String code, String departureAirportCode, String arrivalAirportCode, String company, Aircraft aircraft, double distance) {
         this.id = String.valueOf(idCounter++);
@@ -98,8 +84,21 @@ public class Flight {
         flights.add(flightInstance);
     }
 
-    public void removeFlight(String flightId)
-    {
+    public void removeFlight(String flightId) {
         this.flights = flights.stream().filter((flight) -> { return !flight.getId().equals(flightId); }).toList();
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id='" + id + '\'' +
+                ", code='" + code + '\'' +
+                ", departureAirportCode='" + departureAirportCode + '\'' +
+                ", arrivalAirportCode='" + arrivalAirportCode + '\'' +
+                ", company='" + company + '\'' +
+                ", distance=" + distance +
+                ", aircraft=" + aircraft +
+                ", flights=" + flights +
+                '}';
     }
 }

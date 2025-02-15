@@ -54,4 +54,15 @@ public class Address {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "line1='" + line1 + '\'' +
+                ", line2='" + line2 + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                '}';
+    }
 }

@@ -16,12 +16,13 @@ import java.util.stream.Collectors;
 
 public class ReservationManager {
     private Map<User, List<Reservation>> userReservationMap;
+
+    public static ReservationManager reservationManager = null;
+
     private ReservationManager()
     {
         userReservationMap = new HashMap<>();
     }
-
-    public static ReservationManager reservationManager = null;
 
     public static ReservationManager getInstance()
     {
