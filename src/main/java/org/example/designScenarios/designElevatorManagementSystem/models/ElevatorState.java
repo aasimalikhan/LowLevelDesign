@@ -1,6 +1,8 @@
 package org.example.designScenarios.designElevatorManagementSystem.models;
 
 public enum ElevatorState {
-    IDLE,
-    MOVING
+    READY,
+    RUNNING,
+    WAITING,
+    STOPPED
 }

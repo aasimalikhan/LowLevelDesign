@@ -1,25 +1,21 @@
 package org.example.designScenarios.designElevatorManagementSystem.models;
 
 public class Floor {
-    private long id;
-    private int floorNumber;
-    private FloorButtons floorButtons;
+    private final int floorNumber;
 
-    public Floor(long id, int floorNumber) {
-        this.id = id;
+    public Floor(int floorNumber)
+    {
         this.floorNumber = floorNumber;
-        this.floorButtons = new FloorButtons(this); // Pass 'this' to establish the relationship
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public int getFloorNumber() {
+    public int getFloorNumber()
+    {
         return floorNumber;
     }
 
-    public FloorButtons getFloorButtons() {
-        return floorButtons;
+    public void update(Elevator elevator)
+    {
+        System.out.println("Elevator :" + elevator.getElevatorId() + " has reached floor: " + this.floorNumber);
+        System.out.println();
     }
 }
