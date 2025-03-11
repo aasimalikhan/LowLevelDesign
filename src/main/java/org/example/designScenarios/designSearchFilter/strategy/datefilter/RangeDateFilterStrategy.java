@@ -1,10 +1,10 @@
 package org.example.designScenarios.designSearchFilter.strategy.datefilter;
 
 import org.example.designScenarios.designSearchFilter.exception.filter.DateFilterException;
-import org.example.designScenarios.designSearchFilter.exception.filter.NameFilterException;
 import org.example.designScenarios.designSearchFilter.models.FileSystemResource;
 import org.example.designScenarios.designSearchFilter.models.SearchRequest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class RangeDateFilterStrategy implements DateFilterStrategy{
@@ -13,10 +13,24 @@ public class RangeDateFilterStrategy implements DateFilterStrategy{
         try {
             if(searchRequest == null || searchRequest.getDateRange() == null)
             {
-                throw new IllegalArgumentException("Search request or search date range cannot be null");
+                return fileSystemResourceList;
             }
-            return fileSystemResourceList.stream().filter((item) -> (searchRequest.getDateRange().getFromDate() == null || item.getLastModifiedDate().isAfter(searchRequest.getDateRange().getFromDate())) &&
-                    (searchRequest.getDateRange().getToDate() == null || item.getLastModifiedDate().isBefore(searchRequest.getDateRange().getToDate()))).toList();
+            LocalDateTime fromDate = searchRequest.getDateRange().getFromDate();
+            LocalDateTime toDate = searchRequest.getDateRange().getToDate();
+
+            return fileSystemResourceList.stream().filter(item -> {
+
+                LocalDateTime modifiedDateTime = item.getLastModifiedDate();
+
+                if(modifiedDateTime == null)
+                {
+                    return false;
+                }
+                boolean afterFromDate = (fromDate == null) || (modifiedDateTime.isAfter(fromDate)) || (modifiedDateTime.isEqual(fromDate));
+                boolean beforeToDate = (toDate == null) || (modifiedDateTime.isBefore(toDate)) || (modifiedDateTime.isEqual(toDate));
+
+                return afterFromDate && beforeToDate;
+            }).toList();
         } catch (Exception ex)
         {
             throw new DateFilterException("Error filtering files by date: " + ex.getMessage());

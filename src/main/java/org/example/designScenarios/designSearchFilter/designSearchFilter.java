@@ -3,6 +3,7 @@ package org.example.designScenarios.designSearchFilter;
 import org.example.designScenarios.designSearchFilter.models.Directory;
 import org.example.designScenarios.designSearchFilter.models.File;
 import org.example.designScenarios.designSearchFilter.models.FileSystemResource;
+import org.example.designScenarios.designSearchFilter.models.SearchRequest;
 import org.example.designScenarios.designSearchFilter.service.FileSystemResourceService;
 
 public class designSearchFilter {
@@ -17,9 +18,9 @@ public class designSearchFilter {
     {
         try {
             initializeDrives();
-            FileSystemResource cDrive = fileSystemResourceService.getFileSystemResource("100001");
+            Directory cDrive = fileSystemResourceService.getDirectory("100001");
             initializeDirectoriesIntoDrive(cDrive);
-            Directory musicDirectoryCDrive = fileSystemResourceService.getFileSystemResource("100004");
+            Directory musicDirectoryCDrive = fileSystemResourceService.getDirectory("100004");
             Directory photosDirectoryCDrive = fileSystemResourceService.getDirectory("100005");
             Directory documentsDirectoryCDrive = fileSystemResourceService.getDirectory("100006");
             Directory downloadsDirectoryCDrive = fileSystemResourceService.getDirectory("100007");
@@ -28,7 +29,7 @@ public class designSearchFilter {
 
         } catch (Exception ex)
         {
-            System.out.println("Error initializing resources");
+            System.out.println("Error initializing resources: " + ex.getMessage());
         }
     }
 
@@ -43,7 +44,7 @@ public class designSearchFilter {
             fileSystemResourceService.addDrive(EDrive);
         } catch (Exception ex)
         {
-            System.out.println("Error initializing drives");
+            System.out.println("Error initializing drives: " + ex.getMessage());
         }
     }
 
@@ -62,7 +63,7 @@ public class designSearchFilter {
             fileSystemResourceService.addFileSystemResources(awaisPhoto, directory);
         } catch (Exception ex)
         {
-            System.out.println("Error initializing files into photos directory");
+            System.out.println("Error initializing files into photos directory: " + ex.getMessage());
         }
     }
 
@@ -82,7 +83,7 @@ public class designSearchFilter {
             fileSystemResourceService.addFileSystemResources(kyunSong, directory);
         } catch (Exception ex)
         {
-            System.out.println("Error initializing files into music directory");
+            System.out.println("Error initializing files into music directory: " + ex.getMessage());
         }
     }
 
@@ -99,7 +100,7 @@ public class designSearchFilter {
             fileSystemResourceService.addFileSystemResources(downloadsDirectory, drive);
         } catch (Exception ex)
         {
-            System.out.println("Error initializing directories into drive");
+            System.out.println("Error initializing directories into drive: " + ex.getMessage());
         }
     }
 
@@ -109,7 +110,17 @@ public class designSearchFilter {
             System.out.println(fileSystemResourceService.getAllFileSystemResources());
         } catch (Exception ex)
         {
-            System.out.println("Error fetching directory contents");
+            System.out.println("Error fetching directory contents: " + ex.getMessage());
+        }
+    }
+
+    public void printFilteredContents(SearchRequest searchRequest)
+    {
+        try {
+            System.out.println(fileSystemResourceService.getAllFileSystemResources(searchRequest));
+        } catch (Exception ex)
+        {
+            System.out.println("Error fetching contents: " + ex.getMessage());
         }
     }
 

@@ -1,6 +1,5 @@
 package org.example.designScenarios.designSearchFilter.service;
 
-import org.example.designScenarios.designSearchFilter.exception.filter.FilterException;
 import org.example.designScenarios.designSearchFilter.exception.resource.FileSystemResourceInsertException;
 import org.example.designScenarios.designSearchFilter.exception.resource.FileSystemResourceRetrieveException;
 import org.example.designScenarios.designSearchFilter.models.Directory;
@@ -67,9 +66,9 @@ public class FileSystemResourceService {
         }
     }
 
-    public FileSystemResource getFileSystemResource(String id) throws FileSystemResourceInsertException {
+    public Directory getDirectory(String id) throws FileSystemResourceInsertException {
         try {
-            Optional<FileSystemResource> directory = FileSystemResourceRepository.getInstance().getFileSystemResource(id);
+            Optional<Directory> directory = FileSystemResourceRepository.getInstance().getDirectory(id);
             if(directory.isPresent())
             {
                 return directory.get();

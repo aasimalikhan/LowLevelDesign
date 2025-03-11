@@ -1,7 +1,6 @@
 package org.example.designScenarios.designSearchFilter.models;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class FileSystemResource {
@@ -17,6 +16,7 @@ public abstract class FileSystemResource {
         this.id = String.valueOf(idCounter++);
         this.name = name;
         this.creationDate = LocalDateTime.now();
+        this.lastModifiedDate = LocalDateTime.now();
     }
 
     public String getId()
@@ -32,6 +32,7 @@ public abstract class FileSystemResource {
     public void setName(String name)
     {
         this.name = name;
+        this.setLastModifiedDate(LocalDateTime.now());
     }
 
     public LocalDateTime getCreationDate() {

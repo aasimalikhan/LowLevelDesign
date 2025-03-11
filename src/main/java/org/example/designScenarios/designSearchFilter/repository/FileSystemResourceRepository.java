@@ -28,9 +28,15 @@ public class FileSystemResourceRepository implements GenericRepository<FileSyste
     List<Directory> drives;
     @Override
     public List<FileSystemResource> findAllResources() {
-        return drives.stream().flatMap(item -> {
-            return item.getAllSubResources().stream();
-        }).toList();
+        if(drives == null)
+        {
+            return new ArrayList<>();
+        }
+        List<FileSystemResource> allResources = new ArrayList<>(drives);
+
+        drives.forEach((drive) ->
+                allResources.addAll(drive.getAllSubResources()));
+        return allResources;
     }
 
     @Override
@@ -48,11 +54,9 @@ public class FileSystemResourceRepository implements GenericRepository<FileSyste
         return entity;
     }
 
-    @Override
-    public Optional<FileSystemResource> getFileSystemResource(String id)
+    public Optional<Directory> getDirectory(String id)
     {
-        return findAllResources().stream().filter((drive) -> drive.getId().equals(id)).findFirst();
-//        return drives.stream().filter((drive) -> drive.getId().equals(id)).findFirst();
+        return findAllResources().stream().filter((directory) -> (directory.getId().equals(id) && directory instanceof Directory)).map((directory) -> (Directory) directory).findFirst();
     }
 
     @Override

@@ -9,6 +9,7 @@ public class Directory extends FileSystemResource implements ResourceContainer{
 
     public Directory(String directoryName) {
         super(directoryName);
+        this.immediateResourceList = new ArrayList<>();
     }
 
     @Override
@@ -23,7 +24,20 @@ public class Directory extends FileSystemResource implements ResourceContainer{
 
     @Override
     public List<FileSystemResource> getAllSubResources() {
-        return immediateResourceList.stream().flatMap((item) -> item.getImmediateResources().stream()).toList();
+        if(immediateResourceList == null || immediateResourceList.isEmpty())
+        {
+            return new ArrayList<>();
+        }
+
+        List<FileSystemResource> allResources = new ArrayList<>(immediateResourceList);
+
+        List<FileSystemResource> subResources = new ArrayList<>();
+        for(FileSystemResource resource : immediateResourceList)
+        {
+            subResources.addAll(resource.getAllSubResources());
+        }
+        allResources.addAll(subResources);
+        return allResources;
     }
 
     @Override

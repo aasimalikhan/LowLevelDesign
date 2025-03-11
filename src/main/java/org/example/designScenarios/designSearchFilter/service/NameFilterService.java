@@ -4,7 +4,6 @@ import org.example.designScenarios.designSearchFilter.exception.filter.FilterExc
 import org.example.designScenarios.designSearchFilter.factory.NameFilterStrategyFactory;
 import org.example.designScenarios.designSearchFilter.models.FileSystemResource;
 import org.example.designScenarios.designSearchFilter.models.SearchRequest;
-import org.example.designScenarios.designSearchFilter.strategy.datefilter.DateFilterStrategy;
 import org.example.designScenarios.designSearchFilter.strategy.namefilter.NameFilterStrategy;
 
 import java.util.List;

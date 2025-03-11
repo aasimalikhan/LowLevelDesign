@@ -1,6 +1,5 @@
 package org.example.designScenarios.designSearchFilter.models;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
