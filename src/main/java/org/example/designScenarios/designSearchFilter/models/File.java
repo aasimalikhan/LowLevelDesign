@@ -10,6 +10,11 @@ public class File extends FileSystemResource {
     }
 
     @Override
+    public Long getSize() {
+        return 12L;
+    }
+
+    @Override
     public void ls() {
         System.out.println(this);
     }
@@ -28,8 +33,9 @@ public class File extends FileSystemResource {
     public String toString() {
         return "File{" +
                 "id='" + id + '\'' +
-                ", fileName='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", creationDate=" + creationDate +
+                ", size=" + this.getSize() +
                 ", lastModifiedDate=" + lastModifiedDate +
                 '}';
     }

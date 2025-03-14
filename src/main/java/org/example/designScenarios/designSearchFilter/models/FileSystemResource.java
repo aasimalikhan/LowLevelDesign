@@ -8,6 +8,7 @@ public abstract class FileSystemResource {
     protected String id;
     protected String name;
     protected final LocalDateTime creationDate;
+    protected Long size;
     protected LocalDateTime lastModifiedDate;
     protected List<FileSystemResource> immediateResourceList;
 
@@ -35,6 +36,7 @@ public abstract class FileSystemResource {
         this.setLastModifiedDate(LocalDateTime.now());
     }
 
+    public abstract Long getSize();
     public LocalDateTime getCreationDate() {
         return creationDate;
     }

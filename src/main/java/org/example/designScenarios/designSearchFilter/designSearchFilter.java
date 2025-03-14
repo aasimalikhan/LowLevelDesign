@@ -6,6 +6,9 @@ import org.example.designScenarios.designSearchFilter.models.FileSystemResource;
 import org.example.designScenarios.designSearchFilter.models.SearchRequest;
 import org.example.designScenarios.designSearchFilter.service.FileSystemResourceService;
 
+import java.util.Comparator;
+import java.util.List;
+
 public class designSearchFilter {
     private FileSystemResourceService fileSystemResourceService;
     public designSearchFilter()
@@ -107,7 +110,13 @@ public class designSearchFilter {
     public void printAllContents()
     {
         try {
-            System.out.println(fileSystemResourceService.getAllFileSystemResources());
+            List<FileSystemResource> resources = fileSystemResourceService.getAllFileSystemResources();
+            resources.sort(Comparator.comparing(FileSystemResource::getName));
+
+            for (FileSystemResource resource : resources) {
+                System.out.println(resource);
+            }
+            System.out.println("ALL END");
         } catch (Exception ex)
         {
             System.out.println("Error fetching directory contents: " + ex.getMessage());

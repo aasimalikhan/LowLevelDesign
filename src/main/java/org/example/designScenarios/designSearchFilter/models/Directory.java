@@ -3,6 +3,7 @@ package org.example.designScenarios.designSearchFilter.models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Directory extends FileSystemResource implements ResourceContainer{
     private List<FileSystemResource> immediateResourceList;
@@ -10,6 +11,14 @@ public class Directory extends FileSystemResource implements ResourceContainer{
     public Directory(String directoryName) {
         super(directoryName);
         this.immediateResourceList = new ArrayList<>();
+    }
+
+    @Override
+    public Long getSize() {
+        List<FileSystemResource> subResources = getAllSubResources();
+        return subResources.stream()
+                .mapToLong(resource -> resource.getSize() != null ? resource.getSize() : 0L)
+                .sum();
     }
 
     @Override
@@ -46,8 +55,10 @@ public class Directory extends FileSystemResource implements ResourceContainer{
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", creationDate=" + creationDate +
+                ", size=" + this.getSize() +
                 ", lastModifiedDate=" + lastModifiedDate +
                 ", immediateResourceList=" + immediateResourceList +
+                ", subRecordCount= " + this.getAllSubResources().size() +
                 '}';
     }
 
