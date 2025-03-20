@@ -25,7 +25,12 @@ Click on any problem to view its implementation:
 ## 🧑‍💻 SOLID Principles and Design Patterns
 
 Explore different design pattern implementations following SOLID principles:
+### SOLID PRINCIPLES 
+- [Single Responsibility Principle (SRP)](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/singleResponsibilityPrinciple)
+- [Open/Closed Principle (OCP)](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/openClosePrinciple)
+- [Liskov Substitution Principle (LSP)](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/liskovSubstitutionPrinciple)
 
+### DESIGN PATTERNS
 - [Abstract Factory Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/abstractFactoryPattern/code)
 - [Adapter Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/adapterDesignPattern)
 - [Bridge Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/bridgeDesignPattern)
@@ -38,13 +43,10 @@ Explore different design pattern implementations following SOLID principles:
 - [Factory Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/factoryPattern)
 - [Flyweight Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/flyweightDesignPattern)
 - [Iterator Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/iteratorDesignPattern)
-- [Liskov Substitution Principle](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/liskovSubstitutionPrinciple)
 - [Mediator Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/mediatorDesignPattern)
 - [Memento Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/mementoDesignPattern)
 - [Observer Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/observerDesignPattern/code)
-- [Open/Closed Principle](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/openClosePrinciple)
 - [Proxy Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/proxyDesignPattern/code)
-- [Single Responsibility Principle](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/singleResponsibilityPrinciple)
 - [Singleton Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/singletonDesignPattern)
 - [State Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/stateDesignPattern)
 - [Strategy Design Pattern](https://github.com/aasimalikhan/LowLevelDesign/tree/main/src/main/java/org/example/solidprinciples/strategyDesignPattern)
