@@ -10,5 +10,13 @@ public enum WicketType {
     TIMED_OUT,
     OBSTRUCTING,
     HANDLING,
-    HIT_TWICE
+    HIT_TWICE;
+
+    public boolean requiredFielder() {
+        return switch (this) {
+            case CAUGHT, STUMPED, RUN_OUT -> true;
+            case BOWLED, LBW, HIT_WICKET, TIMED_OUT, OBSTRUCTING, HANDLING, HIT_TWICE -> false;
+            default -> false;
+        };
+    }
 }

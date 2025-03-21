@@ -4,7 +4,6 @@ public enum ExtraType {
     NONE,
     WIDE,
     NO_BALL,
-    BYTE,
+    BYE,
     LEG_BYE,
-    PENALTY
 }

@@ -4,13 +4,11 @@ import org.example.caseStudies.designCricinfo.exceptions.DuplicateEntityExceptio
 import org.example.caseStudies.designCricinfo.exceptions.EntityNotFoundException;
 import org.example.caseStudies.designCricinfo.models.Team;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TeamRepository {
-    private Map<String, Team> teamStore;
+    private final Map<String, Team> teamStore;
     private final AtomicInteger idCounter = new AtomicInteger(0);
 
     private static TeamRepository teamRepository;
@@ -73,6 +71,10 @@ public class TeamRepository {
             throw new EntityNotFoundException("Team", teamId);
         }
         teamStore.remove(teamId);
+    }
+
+    public List<Team> findAll() {
+        return new ArrayList<>(teamStore.values());
     }
 
     public boolean existsById(String teamId) {

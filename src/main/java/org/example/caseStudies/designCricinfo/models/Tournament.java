@@ -17,8 +17,7 @@ public class Tournament {
     private LocalDate endDate;
     private TournamentStatus status;
 
-    public Tournament(String tournamentId, String tournamentName, TournamentFormat format) {
-        this.tournamentId = tournamentId;
+    public Tournament(String tournamentName, TournamentFormat format) {
         this.tournamentName = tournamentName;
         this.format = format;
         this.status = TournamentStatus.UPCOMING;

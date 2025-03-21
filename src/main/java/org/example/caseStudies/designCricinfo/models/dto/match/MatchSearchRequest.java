@@ -1,4 +1,4 @@
-package org.example.caseStudies.designCricinfo.models.dto;
+package org.example.caseStudies.designCricinfo.models.dto.match;
 
 import org.example.caseStudies.designCricinfo.models.enums.MatchFormat;
 import org.example.caseStudies.designCricinfo.models.enums.MatchStatus;

@@ -7,25 +7,25 @@ import org.example.caseStudies.designCricinfo.models.enums.WicketType;
 public class Ball {
     private String ballId;
     private String overId;
-    private int ballNumber;
+    private Integer ballNumber;
     private String bowlerId;
     private String batsmanId;
     private String nonStrikerId;
-    private int runsScored;
-    private int extraRuns;
+    private Integer runsScored;
+    private Integer extraRuns;
     private ExtraType extraType;
     private boolean isWicket;
     private WicketType wicketType;
     private String fielderId;
     private BallResult ballResult;
 
-    public Ball(String ballId, String overId, int ballNumber, String bowlerId, String batsmanId, String nonStrikerId, BallResult ballResult) {
-        this.ballId = ballId;
+    public Ball(String overId, int ballNumber, String bowlerId, String batsmanId, String nonStrikerId, int runsScored, BallResult ballResult) {
         this.overId = overId;
         this.ballNumber = ballNumber;
         this.bowlerId = bowlerId;
         this.batsmanId = batsmanId;
         this.nonStrikerId = nonStrikerId;
+        this.runsScored = runsScored;
         this.ballResult = ballResult;
     }
 
@@ -45,11 +45,11 @@ public class Ball {
         this.overId = overId;
     }
 
-    public int getBallNumber() {
+    public Integer getBallNumber() {
         return ballNumber;
     }
 
-    public void setBallNumber(int ballNumber) {
+    public void setBallNumber(Integer ballNumber) {
         this.ballNumber = ballNumber;
     }
 
@@ -77,19 +77,19 @@ public class Ball {
         this.nonStrikerId = nonStrikerId;
     }
 
-    public int getRunsScored() {
+    public Integer getRunsScored() {
         return runsScored;
     }
 
-    public void setRunsScored(int runsScored) {
+    public void setRunsScored(Integer runsScored) {
         this.runsScored = runsScored;
     }
 
-    public int getExtraRuns() {
+    public Integer getExtraRuns() {
         return extraRuns;
     }
 
-    public void setExtraRuns(int extraRuns) {
+    public void setExtraRuns(Integer extraRuns) {
         this.extraRuns = extraRuns;
     }
 

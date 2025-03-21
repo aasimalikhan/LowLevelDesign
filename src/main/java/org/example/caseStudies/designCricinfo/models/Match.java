@@ -21,6 +21,7 @@ public class Match {
     private LocalDateTime endDate;
     private String tossWinnerTeamId;
     private TossDecision tossDecision;
+    private Integer customOvers;
 
     public Match(List<String> teamIds, MatchFormat format) {
         this.teamIds = new LinkedHashSet<>(teamIds);
@@ -121,5 +122,22 @@ public class Match {
 
     public void setTossDecision(TossDecision tossDecision) {
         this.tossDecision = tossDecision;
+    }
+
+    public Integer getCustomOvers() {
+        if(this.getFormat().equals(MatchFormat.CUSTOM))
+        {
+            return this.customOvers;
+        }
+        throw new IllegalStateException("Cannot get custom overs for non-custom match format: " + this.getFormat());
+    }
+
+    public void setCustomOvers(Integer customOvers)
+    {
+        if(this.getFormat().equals(MatchFormat.CUSTOM))
+        {
+            this.customOvers = customOvers;
+        }
+        throw new IllegalStateException("Cannot update custom overs for non-custom match format: " + this.getFormat());
     }
 }

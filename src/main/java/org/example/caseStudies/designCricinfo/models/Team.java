@@ -10,6 +10,13 @@ public class Team {
     private String captainId;
     private String homeVenueId;
 
+    public Team(String teamName, List<String> playerIdList, String captainId, String homeVenueId) {
+        this.teamName = teamName;
+        this.playerIdList = new LinkedHashSet<>(playerIdList);
+        this.captainId = captainId;
+        this.homeVenueId = homeVenueId;
+    }
+
     public String getTeamId() {
         return teamId;
     }

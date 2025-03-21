@@ -14,8 +14,15 @@ public class Player {
     private BowlingStyle bowlingStyle;
     private boolean isActive;
 
-    public Player(String playerId, String playerName, LocalDate dateOfBirth, String nationality, boolean isActive) {
-        this.playerId = playerId;
+    public Player(String playerName, LocalDate dateOfBirth, String nationality, BattingStyle battingStyle, BowlingStyle bowlingStyle) {
+        this.playerName = playerName;
+        this.dateOfBirth = dateOfBirth;
+        this.nationality = nationality;
+        this.battingStyle = battingStyle;
+        this.bowlingStyle = bowlingStyle;
+    }
+
+    public Player(String playerName, LocalDate dateOfBirth, String nationality, boolean isActive) {
         this.playerName = playerName;
         this.dateOfBirth = dateOfBirth;
         this.nationality = nationality;

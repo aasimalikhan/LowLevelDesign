@@ -4,9 +4,10 @@ import org.example.caseStudies.designCricinfo.exceptions.BusinessValidationExcep
 import org.example.caseStudies.designCricinfo.models.Match;
 import org.example.caseStudies.designCricinfo.models.Team;
 import org.example.caseStudies.designCricinfo.models.Tournament;
-import org.example.caseStudies.designCricinfo.models.dto.MatchCreateRequest;
-import org.example.caseStudies.designCricinfo.models.dto.MatchSearchRequest;
-import org.example.caseStudies.designCricinfo.models.dto.MatchUpdateRequest;
+import org.example.caseStudies.designCricinfo.models.dto.match.MatchCreateRequest;
+import org.example.caseStudies.designCricinfo.models.dto.match.MatchSearchRequest;
+import org.example.caseStudies.designCricinfo.models.dto.match.MatchUpdateRequest;
+import org.example.caseStudies.designCricinfo.models.enums.MatchFormat;
 import org.example.caseStudies.designCricinfo.models.enums.MatchStatus;
 import org.example.caseStudies.designCricinfo.repository.MatchRepository;
 import org.example.caseStudies.designCricinfo.repository.TeamRepository;
@@ -28,10 +29,10 @@ public class MatchService {
         boolean isTournamentMatch = matchCreateRequest.tournamentId != null;
         Tournament tournament = tournamentRepository.getById(matchCreateRequest.tournamentId);
 
-        List<Team> teams = new ArrayList<>();
+        List<String> teamIds = new ArrayList<>();
         for (String teamId : matchCreateRequest.teamIds) {
             Team team = teamRepository.getById(teamId);
-            teams.add(team);
+            teamIds.add(team.getTeamId());
             if (isTournamentMatch && !tournament.getTeamIds().contains(teamId)) {
                 throw new BusinessValidationException(
                         String.format("Team %s is not part of tournament %s", team.getTeamName(), tournament.getTournamentName())
@@ -42,8 +43,23 @@ public class MatchService {
         if (matchCreateRequest.teamIds.size() != 2) {
             throw new BusinessValidationException("A match must have exactly 2 teams");
         }
+
+        if(matchCreateRequest.matchFormat == null)
+        {
+            throw new BusinessValidationException("Match format cannot be empty");
+        }
+
+        if(matchCreateRequest.matchFormat.equals(MatchFormat.CUSTOM) && matchCreateRequest.customOvers == null)
+        {
+            throw new IllegalArgumentException("Custom match format needs specifying the number of overs");
+        }
+
         Match match = new Match(matchCreateRequest.teamIds, matchCreateRequest.matchFormat);
+        if(matchCreateRequest.matchFormat == MatchFormat.CUSTOM) {
+            match.setCustomOvers(matchCreateRequest.customOvers);
+        }
         match.setInningsIds(new ArrayList<>());
+        match.setTeamIds(teamIds);
         match.setMatchStatus(MatchStatus.UPCOMING);
         Match savedMatch = matchRepository.save(match);
 
@@ -75,8 +91,9 @@ public class MatchService {
         {
             throw new BusinessValidationException("Match end date cannot be before start date");
         }
+        Match updatedMatch = matchRepository.update(existingMatch);
         logger.info("Successfully updated match with ID: " + matchId);
-        return matchRepository.update(existingMatch);
+        return updatedMatch;
     }
 
     public void deleteMatch(String matchId)
@@ -101,7 +118,7 @@ public class MatchService {
         logger.info("Successfully deleted match with ID: " + matchId);
     }
 
-    private List<Match> findMatches(MatchSearchRequest matchSearchRequest)
+    public List<Match> findMatches(MatchSearchRequest matchSearchRequest)
     {
         logger.debug("Finding matches with filters");
         return matchRepository.findAll().stream().filter((match) -> {

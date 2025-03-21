@@ -11,12 +11,10 @@ public class Over {
     private LinkedHashSet<String> ballIds;
     private boolean isCompleted;
 
-    public Over(String overId, String inningsId, int overNumber, String bowlerId) {
-        this.overId = overId;
+    public Over(String inningsId, int overNumber, String bowlerId) {
         this.inningsId = inningsId;
         this.overNumber = overNumber;
         this.bowlerId = bowlerId;
-        this.isCompleted = false;
     }
 
     public String getOverId() {

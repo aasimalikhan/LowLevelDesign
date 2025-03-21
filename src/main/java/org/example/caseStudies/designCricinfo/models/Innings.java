@@ -15,14 +15,11 @@ public class Innings {
     private LinkedHashSet<String> overIds;
     private InningsStatus inningsStatus;
 
-    public Innings(String inningsId, String matchId, int inningsNumber, String battingTeamId, String bowlingTeamId) {
-        this.inningsId = inningsId;
+    public Innings(String matchId, int inningsNumber, String battingTeamId, String bowlingTeamId) {
         this.matchId = matchId;
         this.inningsNumber = inningsNumber;
         this.battingTeamId = battingTeamId;
         this.bowlingTeamId = bowlingTeamId;
-        this.overIds = new LinkedHashSet<>();
-        this.inningsStatus = InningsStatus.DECLARED;
     }
 
     public String getInningsId() {
